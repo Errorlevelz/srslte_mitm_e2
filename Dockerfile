@@ -30,10 +30,10 @@ RUN apt-get update -y --allow-unauthenticated && \
         libnetfilter-queue-dev \
         iptables
 
-RUN git clone --branch release_19_12 https://github.com/srsLTE/srsLTE /srsLTE
-RUN mkdir /srsLTE/build
+RUN git clone --branch release_19_12 https://github.com/srsLTE/srsLTE /root/srsLTE
+RUN mkdir /root/srsLTE/build
 
-WORKDIR /srsLTE/build
+WORKDIR /root/srsLTE/build
 RUN cmake ../ && make -j`nproc` && make install && ldconfig
 RUN ./srslte_install_configs.sh service
 
