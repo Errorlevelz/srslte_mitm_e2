@@ -5,7 +5,7 @@
 # 先安裝 docker
 
 # 建立架構
-`sudo apt install docker-compose`  
+`sudo apt install docker-compose -y`  
 `sudo docker-compose up`
 
 # 分別進入 container 裡
@@ -20,7 +20,7 @@
 
 
 # 簡單測試 SCTP 能不能用 (in container)
-`apt-get install libsctp-dev lksctp-tools`
+`apt install libsctp-dev lksctp-tools -y`
 
 #### MEC端:
 `python ~/net_cut.py`
@@ -29,7 +29,7 @@
 `sctp_darn -H 0 -P 2500 -l`
 
 #### ENB端(當 Client)：
-`sctp_darn -H 0 -P 2600 -h 10.6.1.2 -p 2500 -s`
+`sctp_darn -H 0 -P 2600 -h 10.7.1.2 -p 2500 -s`
 
 # 其他
 #### 移除架構
