@@ -1,0 +1,72 @@
+version: '3'
+
+services:
+  srsue:
+    container_name: srsue01
+    build: .
+    ports:
+       - "2004:2004/tcp"
+    networks:
+      ran01:
+        ipv4_address: 10.6.1.4
+    tty: true
+    stdin_open: true
+    privileged: true
+
+  srsenb:
+    container_name: srsenb01
+    build: .
+    ports:
+       - "2002:2002/tcp"
+    command: >
+       sh -c "route add -host 10.7.1.2 eth0; /bin/bash"
+    networks:
+      ran01:
+        ipv4_address: 10.6.1.2
+    tty: true
+    stdin_open: true
+    privileged: true
+  srsepc:
+    container_name: srsepc01
+    build: .
+    ports:
+       - "2003:2003/tcp"
+    command: >
+       sh -c "route add -host 10.6.1.2 eth0; /bin/bash"
+    networks:
+      core01:
+        ipv4_address: 10.7.1.2
+    tty: true
+    stdin_open: true
+    privileged: true
+  mec:
+    container_name: mec01
+    build: .
+    command: >
+       sh -c "arp -i eth0 -s 10.6.1.2 02:42:0a:07:01:03 pub &&
+              arp -i eth1 -s 10.7.1.2 02:42:0a:06:01:03 pub &&
+              route add -host 10.7.1.2 eth0 &&
+              route add -host 10.6.1.2 eth1 &&
+              iptables -I FORWARD -j NFQUEUE --queue-num 0 ; /bin/bash"
+    networks:
+     core01:
+       ipv4_address: 10.7.1.3
+     ran01:
+       ipv4_address: 10.6.1.3
+    tty: true
+    stdin_open: true
+    privileged: true
+
+networks:
+   ran01:
+     driver: bridge
+     ipam:
+       driver: default
+       config:
+         - subnet: 10.6.1.0/24
+   core01:
+     driver: bridge
+     ipam:
+       driver: default
+       config:
+         - subnet: 10.7.1.0/24
