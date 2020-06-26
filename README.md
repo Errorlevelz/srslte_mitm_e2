@@ -7,6 +7,7 @@ cd srslte_mitm
 # 先安裝 docker
 
 # 建立架構
+![image](srsLTE_MITM_arch.png)
 ```
 sudo apt install docker-compose -y
 sudo docker-compose up
@@ -40,7 +41,7 @@ apt install libsctp-dev lksctp-tools -y
 
 #### MEC端:
 ```
-python ~/net_cut.py
+python ~/mec_net_cut.py
 ```
 
 #### EPC端(當 Server)：
@@ -62,11 +63,21 @@ srsenb --rf.device_name=zmq --rf.device_args="fail_on_disconnect=true,tx_port=tc
 ```
 #### UE 端
 ```
+# 可以用 tmux 新增多分頁來測試
 srsue --rf.device_name=zmq --rf.device_args="tx_port=tcp://*:2001,rx_port=tcp://10.8.1.2:2000,id=ue,base_srate=23.04e6"
 ```
-
+```
+# 等連線後，在另一個 tmux 分頁
+bash ~/ue_net_set.sh
+```
 
 # 其他
+#### tmux 使用
+C-b 指的是 Ctrl + b 同時按  
+新增分頁：C-b c  
+切換分頁：C-b 數字  
+離開tmux：C-b d  
+  
 #### 移除架構
 ```
 sudo docker-compose down
