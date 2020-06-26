@@ -34,7 +34,8 @@ services:
     ports:
        - "2003:2003/tcp"
     command: >
-       sh -c "route add -host 10.6.1.2 eth0; /bin/bash"
+       sh -c "route add -host 10.6.1.2 eth0 &&
+              iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE; /bin/bash"
     networks:
       core01:
         ipv4_address: 10.7.1.2

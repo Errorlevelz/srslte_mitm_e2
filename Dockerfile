@@ -18,7 +18,8 @@ RUN apt-get update -y --allow-unauthenticated && \
 	libsctp-dev \
 	g++ \
 	iputils-ping \
-	vim \ 
+	vim \
+        tmux \
 	libbladerf1 \
 	libbladerf2 \
 	libbladerf-dev \
@@ -39,5 +40,7 @@ RUN ./srslte_install_configs.sh service
 
 RUN pip install netfilterqueue scapy
 
-COPY ./file/net_cut.py /root/net_cut.py
+COPY ./file/mec_net_cut.py /root/mec_net_cut.py
+COPY ./file/ue_net_set.sh /root/ue_net_set.sh
+
 WORKDIR /root
