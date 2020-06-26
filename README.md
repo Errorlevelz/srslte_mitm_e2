@@ -3,6 +3,7 @@
 git clone https://gitlab.com/jed_tw/srslte_mitm  
 cd srslte_mitm
 ```
+請自行修改 /etc/srslte/ 底下的設定檔, 目前都為預設 
 
 # 先安裝 docker
 
