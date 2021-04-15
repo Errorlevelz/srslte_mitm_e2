@@ -29,12 +29,12 @@ def process_packet(packet):
             PDU = S1AP.S1AP_PDU_Descriptions.S1AP_PDU
             PDU.from_aper(scapy_packet[scapy.SCTP][1].data)
             print(PDU.to_asn1())
-            # Get NAS Layer
-            IEs = get_val_at(PDU, ['initiatingMessage', 'value', 'UplinkNASTransport', 'protocolIEs'])
-                for ie in IEs:
-                    if ie['value'][0]=='NAS-PDU' :
-                        Msg, err = parse_NASLTE_MT(ie['value'][1])
-                        print(Msg.show())
+            ## Get NAS Layer
+            #IEs = get_val_at(PDU, ['initiatingMessage', 'value', 'UplinkNASTransport', 'protocolIEs'])
+            #    for ie in IEs:
+            #        if ie['value'][0]=='NAS-PDU' :
+            #            Msg, err = parse_NASLTE_MT(ie['value'][1])
+            #            print(Msg.show())
         except Exception as e:
             print("[Packet Ignore] An exception occurred, ", e)
 

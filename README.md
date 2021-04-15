@@ -3,7 +3,7 @@
 git clone https://gitlab.com/jed_tw/srslte_mitm  
 cd srslte_mitm
 ```
-本專案之 ZeroMQ 功能不需要更改 srsLTE 設定檔案
+本專案之 ZeroMQ 功能不需要更改 srsLTE 設定檔案 
 srsLTE 設定檔預設在 /etc/srslte/ 下, 目前都為預設 
 
 # 先安裝 docker
@@ -106,9 +106,7 @@ C-b 指的是 Ctrl + b 同時按
 # 請先確定都了解指令再使用
 
 #### (請確定要這麼做，再下這個指令) 不保留資料，並移除架構
-```
-sudo docker-compose down
-```
+`sudo docker-compose down`
 
 ####  (請確定要這麼做，再下這個指令) Reset Docker Setting
 `sudo docker system prune`
