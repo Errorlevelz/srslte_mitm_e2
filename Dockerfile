@@ -31,7 +31,7 @@ RUN apt-get update -y --allow-unauthenticated && \
         libnetfilter-queue-dev \
         iptables
 
-RUN git clone --branch release_19_12 https://github.com/srsLTE/srsLTE /root/srsLTE
+RUN git clone --branch release_20_10_1 https://github.com/srsLTE/srsLTE /root/srsLTE
 RUN mkdir /root/srsLTE/build
 
 WORKDIR /root/srsLTE/build
