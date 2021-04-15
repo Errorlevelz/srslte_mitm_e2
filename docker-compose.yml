@@ -2,6 +2,7 @@ version: '3'
 
 services:
   srsue:
+    hostname: srsue
     container_name: srsue01
     build: .
     ports:
@@ -14,6 +15,7 @@ services:
     privileged: true
 
   srsenb:
+    hostname: srsenb
     container_name: srsenb01
     build: .
     ports:
@@ -29,6 +31,7 @@ services:
     stdin_open: true
     privileged: true
   srsepc:
+    hostname: srsepc
     container_name: srsepc01
     build: .
     ports:
@@ -43,6 +46,7 @@ services:
     stdin_open: true
     privileged: true
   mec:
+    hostname: mec
     container_name: mec01
     build: .
     command: >
