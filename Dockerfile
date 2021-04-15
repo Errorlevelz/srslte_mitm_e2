@@ -38,9 +38,14 @@ WORKDIR /root/srsLTE/build
 RUN cmake ../ && make -j`nproc` && make install && ldconfig
 RUN ./srslte_install_configs.sh service
 
+# netfilterqueue & scapy
 RUN pip install netfilterqueue scapy
+# pycrate & CryptoMobile
+RUN pip install git+https://github.com/P1sec/pycrate git+https://github.com/P1sec/CryptoMobile
 
+# copy files
 COPY ./file/mec_net_cut.py /root/mec_net_cut.py
 COPY ./file/ue_net_set.sh /root/ue_net_set.sh
+COPY ./file/mec_net_cut_advanced.py /root/mec_net_cut_advanced.py
 
 WORKDIR /root

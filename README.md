@@ -40,7 +40,10 @@ sudo docker-compose exec srsue /bin/bash
 
 #### MEC端:
 ```
+# 基本用途
 python ~/mec_net_cut.py
+# 可以解 s1ap 封包
+python ~/mec_net_cut_advanced.py
 ```
 
 #### EPC 端
