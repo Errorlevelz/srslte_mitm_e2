@@ -3,8 +3,7 @@
 git clone https://gitlab.com/jed_tw/srslte_mitm  
 cd srslte_mitm
 ```
-本專案之 ZeroMQ 功能不需要更改 srsLTE 設定檔案 
-srsLTE 設定檔預設在 /etc/srslte/ 下, 目前都為預設 
+本專案之 ZeroMQ 功能不需要更改 srsLTE 設定檔案，預設值與檔案路徑為 /etc/srslte/
 
 # 先安裝 docker
 
@@ -41,9 +40,9 @@ sudo docker-compose exec srsue /bin/bash
 #### MEC端:
 ```
 # 基本用途
-python ~/mec_net_cut.py
+python ~/mec_net_pkt_filter.py
 # 可以解 s1ap 封包
-python ~/mec_net_cut_advanced.py
+python ~/mec_net_pkt_filter_advanced.py
 ```
 
 #### EPC 端
@@ -53,16 +52,16 @@ srsepc --mme.mme_bind_addr 10.7.1.2 --spgw.gtpu_bind_addr 10.7.1.2
 
 #### ENB端
 ```
-srsenb --enb.mme_addr=10.7.1.2 --enb.gtp_bind_addr=10.6.1.2 --enb.s1c_bind_addr=10.6.1.2 --rf.device_name=zmq --rf.device_args="fail_on_disconnect=true,tx_port=tcp://*:2000,rx_port=tcp://10.8.1.4:2001,id=enb,base_srate=23.04e6"
+srsenb --enb.mme_addr=10.7.1.2 --enb.gtp_bind_addr=10.6.1.2 --enb.s1c_bind_addr=10.6.1.2 --rf.device_name=zmq --rf.device_args="fail_on_disconnect=true,tx_port=tcp://*:20000,rx_port=tcp://10.8.1.4:20001,id=enb,base_srate=23.04e6"
 ```
 #### UE 端
 ```
 # 可以用 tmux 新增多分頁來測試
-srsue --rf.device_name=zmq --rf.device_args="tx_port=tcp://*:2001,rx_port=tcp://10.8.1.2:2000,id=ue,base_srate=23.04e6"
+srsue --rf.device_name=zmq --rf.device_args="tx_port=tcp://*:20001,rx_port=tcp://10.8.1.2:20000,id=ue,base_srate=23.04e6"
 ```
 ```
 # 等連線後，在另一個 tmux 分頁
-bash ~/ue_net_set.sh
+bash ~/ue_net_switch_to_cellular.sh
 ```
 
 # 暫時離開 Docker compose (會保留資料)
@@ -79,7 +78,7 @@ apt install libsctp-dev lksctp-tools -y
 
 #### MEC端:
 ```
-python ~/mec_net_cut.py
+python ~/mec_net_pkt_filter.py
 ```
 
 #### EPC端(當 Server)：
@@ -104,6 +103,9 @@ C-b 指的是 Ctrl + b 同時按
 
 # 危險指令
 # 請先確定都了解指令再使用
+
+#### (請確定要這麼做，再下這個指令) 不保留資料，並重新編譯架構 (rebuild)
+`sudo docker-compose up --build`
 
 #### (請確定要這麼做，再下這個指令) 不保留資料，並移除架構
 `sudo docker-compose down`
