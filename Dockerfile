@@ -47,5 +47,6 @@ RUN pip install git+https://github.com/P1sec/pycrate git+https://github.com/P1se
 COPY ./file/mec_net_cut.py /root/mec_net_cut.py
 COPY ./file/ue_net_set.sh /root/ue_net_set.sh
 COPY ./file/mec_net_cut_advanced.py /root/mec_net_cut_advanced.py
+COPY ./file/epc_tunnel_ue_ip_to_sgi_watch_dog.sh /root/epc_tunnel_ue_ip_to_sgi_watch_dog.sh
 
 WORKDIR /root

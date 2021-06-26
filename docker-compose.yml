@@ -38,10 +38,16 @@ services:
        - "2003:2003/tcp"
     command: >
        sh -c "route add -host 10.6.1.2 eth0 &&
-              iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE; /bin/bash"
+              route del default &&
+              route add default gw 10.9.1.1 &&
+              iptables -t nat -A POSTROUTING -o eth1 -j MASQUERADE; /bin/bash"
     networks:
       core01:
         ipv4_address: 10.7.1.2
+      sgi01:
+        ipv4_address: 10.9.1.2
+      sgi02:
+        ipv4_address: 10.9.2.2
     tty: true
     stdin_open: true
     privileged: true
@@ -83,3 +89,15 @@ networks:
        driver: default
        config:
          - subnet: 10.8.1.0/24
+   sgi01:
+     driver: bridge
+     ipam:
+       driver: default
+       config:
+         - subnet: 10.9.1.0/24
+   sgi02:
+     driver: bridge
+     ipam:
+       driver: default
+       config:
+         - subnet: 10.9.2.0/24
