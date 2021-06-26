@@ -44,9 +44,9 @@ RUN pip install netfilterqueue scapy
 RUN pip install git+https://github.com/P1sec/pycrate git+https://github.com/P1sec/CryptoMobile
 
 # copy files
-COPY ./file/mec_net_cut.py /root/mec_net_cut.py
-COPY ./file/ue_net_set.sh /root/ue_net_set.sh
-COPY ./file/mec_net_cut_advanced.py /root/mec_net_cut_advanced.py
 COPY ./file/epc_tunnel_ue_ip_to_sgi_watch_dog.sh /root/epc_tunnel_ue_ip_to_sgi_watch_dog.sh
+COPY ./file/mec_net_pkt_filter.py /root/mec_net_pkt_filter.py
+COPY ./file/mec_net_pkt_filter_advanced.py /root/mec_net_pkt_filter_advanced.py
+COPY ./file/ue_net_switch_to_cellular.sh /root/ue_net_switch_to_cellular.sh
 
 WORKDIR /root
