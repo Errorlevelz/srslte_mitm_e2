@@ -62,7 +62,7 @@ srsenb --enb.mme_addr=10.7.1.2 --enb.gtp_bind_addr=10.6.1.2 --enb.s1c_bind_addr=
 srsue --rf.device_name=zmq --rf.device_args="tx_port=tcp://*:20001,rx_port=tcp://10.8.1.2:20000,id=ue,base_srate=23.04e6"
 ```
 ```
-# 等連線後，在另一個 terminal (或分頁或 tmux) 執行
+# 等連線後，在另一個分頁執行
 bash /root/file/ue_net_switch_to_cellular.sh
 ```
 

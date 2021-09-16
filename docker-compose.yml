@@ -10,6 +10,10 @@ services:
     networks:
       ue01:
         ipv4_address: 10.8.1.4
+    volumes:
+     - type: bind
+       source: "./file/"
+       target: "/root/file/"
     tty: true
     stdin_open: true
     privileged: true
@@ -27,6 +31,10 @@ services:
         ipv4_address: 10.6.1.2
       ue01:
         ipv4_address: 10.8.1.2
+    volumes:
+     - type: bind
+       source: "./file/"
+       target: "/root/file/"
     tty: true
     stdin_open: true
     privileged: true
@@ -48,6 +56,10 @@ services:
         ipv4_address: 10.9.1.2
       sgi02:
         ipv4_address: 10.9.2.2
+    volumes:
+     - type: bind
+       source: "./file/"
+       target: "/root/file/"
     tty: true
     stdin_open: true
     privileged: true
