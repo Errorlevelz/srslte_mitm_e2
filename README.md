@@ -40,9 +40,11 @@ sudo docker-compose exec srsue /bin/bash
 #### MEC端:
 ```
 # 基本用途
-python ~/mec_net_pkt_filter.py
-# 可以解 s1ap 封包
-python ~/mec_net_pkt_filter_advanced.py
+python2 /root/file/mec_net_pkt_filter.py
+# 可以解 s1ap 封包 (以擷取 NAS Layer 值為範例)
+python2 /root/file/mec_net_pkt_filter_advanced.py
+# 可以解 gtp-u 封包 (以 dns spoof 為範例)
+python2 /root/file/mec_net_pkt_filter_advanced_dns_spoof.py
 ```
 
 #### EPC 端
@@ -60,8 +62,8 @@ srsenb --enb.mme_addr=10.7.1.2 --enb.gtp_bind_addr=10.6.1.2 --enb.s1c_bind_addr=
 srsue --rf.device_name=zmq --rf.device_args="tx_port=tcp://*:20001,rx_port=tcp://10.8.1.2:20000,id=ue,base_srate=23.04e6"
 ```
 ```
-# 等連線後，在另一個 tmux 分頁
-bash ~/ue_net_switch_to_cellular.sh
+# 等連線後，在另一個 terminal (或分頁或 tmux) 執行
+bash /root/file/ue_net_switch_to_cellular.sh
 ```
 
 # 暫時離開 Docker compose (會保留資料)
@@ -78,7 +80,7 @@ apt install libsctp-dev lksctp-tools -y
 
 #### MEC端:
 ```
-python ~/mec_net_pkt_filter.py
+python2 /root/file/mec_net_pkt_filter.py
 ```
 
 #### EPC端(當 Server)：
