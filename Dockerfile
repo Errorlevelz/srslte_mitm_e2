@@ -31,12 +31,14 @@ RUN apt-get update -y --allow-unauthenticated && \
         libnetfilter-queue-dev \
         iptables
 
-RUN git clone --branch release_20_10_1 https://github.com/srsLTE/srsLTE /root/srsLTE
-RUN mkdir /root/srsLTE/build
+#add own dir, loacl dir name: srsran_oenb
+#ADD srsran_oenb /root/srsRAN
+RUN git clone --branch release_21_10 https://github.com/srsran/srsRAN /root/srsRAN
+RUN mkdir /root/srsRAN/build
 
-WORKDIR /root/srsLTE/build
+WORKDIR /root/srsRAN/build
 RUN cmake ../ && make -j`nproc` && make install && ldconfig
-RUN ./srslte_install_configs.sh service
+RUN ./srsran_install_configs.sh service
 
 # netfilterqueue & scapy
 RUN pip install netfilterqueue scapy
