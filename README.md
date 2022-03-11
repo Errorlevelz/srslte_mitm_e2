@@ -45,6 +45,8 @@ python2 /root/file/mec_net_pkt_filter.py
 python2 /root/file/mec_net_pkt_filter_advanced.py
 # 可以解 gtp-u 封包 (以 dns spoof 為範例)
 python2 /root/file/mec_net_pkt_filter_advanced_dns_spoof.py
+# 將流量導至 Local Service
+python2 /root/file/mec_net_pkt_fwd_edge_service.py
 ```
 
 #### EPC 端
@@ -64,6 +66,10 @@ srsue --rf.device_name=zmq --rf.device_args="tx_port=tcp://*:20001,rx_port=tcp:/
 ```
 # 等連線後，在另一個分頁執行
 bash /root/file/ue_net_switch_to_cellular.sh
+
+# 如果在 MEC 執行 dns spoof 或是 fwd edge service 可以驗證一下結果
+ping example.com
+ping google.com 
 ```
 
 # 暫時離開 Docker compose (會保留資料)
