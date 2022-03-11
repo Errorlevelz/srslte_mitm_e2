@@ -68,7 +68,6 @@ srsue --rf.device_name=zmq --rf.device_args="tx_port=tcp://*:20001,rx_port=tcp:/
 bash /root/file/ue_net_switch_to_cellular.sh
 
 # 如果在 MEC 執行 dns spoof 或是 fwd edge service 可以驗證一下結果
-ping example.com
 ping google.com 
 ```
 

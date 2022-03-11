@@ -42,7 +42,7 @@ def process_packet(packet):
             pass
         print("[After ]:", scapy_packet.summary())
 
-    elif scapy_packet.haslayer(GTP_U_Header):
+    if scapy_packet.haslayer(GTP_U_Header):
         try:
             INNER_IP_src = scapy_packet[scapy.UDP][GTP_U_Header][scapy.IP].src
             INNER_IP_dst = scapy_packet[scapy.UDP][GTP_U_Header][scapy.IP].dst
