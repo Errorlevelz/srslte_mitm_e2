@@ -11,6 +11,7 @@ RUN apt-get update -y --allow-unauthenticated && \
 	git \
 	libzmq3-dev \
 	libtool-bin \
+	libpcap-dev \
 	libfftw3-dev \
 	libmbedtls-dev \
 	libboost-program-options-dev \
@@ -33,12 +34,23 @@ RUN apt-get update -y --allow-unauthenticated && \
 
 #add own dir, loacl dir name: srsran_oenb
 #ADD srsran_oenb /root/srsRAN
-RUN git clone --branch release_21_10 https://github.com/srsran/srsRAN /root/srsRAN
+#RUN git clone --branch release_21_10 https://github.com/srsran/srsRAN /root/srsRAN
+COPY srsran_oenb-master/ /root/srsRAN
+COPY e2/ /root/e2
 RUN mkdir /root/srsRAN/build
+RUN mkdir /root/ricind
+RUN mkdir /logs/
+
+COPY ip_malicious /root/ricind/ip_malicious
+
+WORKDIR /root/e2
+RUN ./build_odu.sh clean
 
 WORKDIR /root/srsRAN/build
 RUN cmake ../ && make -j`nproc` && make install && ldconfig
 RUN ./srsran_install_configs.sh service
+
+
 
 # netfilterqueue & scapy
 RUN pip install netfilterqueue scapy
